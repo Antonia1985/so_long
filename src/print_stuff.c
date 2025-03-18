@@ -23,4 +23,33 @@ void	add_and_print_move(void)
 	ft_putstr_fd("moves: ", 1);
 	ft_putstr_fd(c, 1);
 	ft_putstr_fd("\n", 1);
+	free(c);
+}
+
+void	print_errors(t_game *game, int exits, int players)
+{
+	char	*str_collected;
+	char	*str_total_collectibles;
+	char	*str_exits;
+	char	*str_players;
+
+	str_collected = ft_itoa(game->collected);
+	str_total_collectibles = ft_itoa(game->total_collectibles);
+	str_exits = ft_itoa(exits);
+	str_players = ft_itoa(players);
+	ft_putstr_fd("Error\nThe map is invalid.", 1);
+	ft_putstr_fd("\nAccessible Collectibles: ", 1);
+	ft_putstr_fd(str_collected, 1);
+	ft_putstr_fd("\nTotal Collectibles: ", 1);
+	ft_putstr_fd(str_total_collectibles, 1);
+	ft_putstr_fd("\nExits: ", 1);
+	ft_putstr_fd(str_exits, 1);
+	ft_putstr_fd("\nPlayers: ", 1);
+	ft_putstr_fd(str_players, 1);
+	ft_putstr_fd("\n", 1);
+	free(str_collected);
+	free(str_total_collectibles);
+	free(str_exits);
+	free(str_players);
+	close_game(game);
 }

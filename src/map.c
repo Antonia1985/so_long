@@ -37,8 +37,11 @@ void	fill_the_map(char **map, int num_l, int fd)
 	int		i;
 
 	i = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	while (1)
 	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
 		if (line)
 		{
 			trimmed_line = ft_strtrim(line, "\n\r");
@@ -80,8 +83,9 @@ char	**read_map(char *filename)
 
 void	render_map(t_game *game)
 {
-	int x;
-	int y;
+	int		x;
+	int		y;
+	void	*img;
 
 	y = 0;
 	while (y < game->map_height)
@@ -89,7 +93,6 @@ void	render_map(t_game *game)
 		x = 0;
 		while (x < game->map_width)
 		{
-			void *img = game->floor;
 			if (game->map[y][x] == '1')
 				img = game->wall;
 			else if (game->map[y][x] == '0')
@@ -105,4 +108,17 @@ void	render_map(t_game *game)
 		}
 		y++;
 	}
+}
+
+void	free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }
