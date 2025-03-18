@@ -35,6 +35,10 @@ int	close_game(t_game *game)
 	mlx_destroy_image(game->mlx, game->collect);
 	mlx_destroy_image(game->mlx, game->exit);
 	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	if (game->map)
+		free_map(game->map);
 	exit(0);
 	return (0);
 }
@@ -49,19 +53,12 @@ static void	move_player(t_game *game, int new_y, int new_x)
 	{
 		game->finished = 1;
 		ft_putstr_fd("Finish!", 1);
-		ft_putstr_fd("\n", 1);
-		exit(0);
+		close_game(game);
 	}
 	else if (game->map[new_y][new_x] == 'C')
 	{
-        game->collected++;
-        char		*coll;
-		coll = ft_itoa(game->collected);
-		ft_putstr_fd("collected = ", 1);
-		ft_putstr_fd(coll, 1);
-		ft_putstr_fd("\n", 1);
-        free(coll);
-    }
+		game->collected++;
+	}
 	game->map[game->player_y][game->player_x] = '0';
 	game->map[new_y][new_x] = 'P';
 	game->player_x = new_x;
@@ -72,7 +69,7 @@ static void	move_player(t_game *game, int new_y, int new_x)
 
 int	handle_key(int key, t_game *game)
 {
-	if (key == XK_Escape) // 65307)
+	if (key == XK_Escape)
 	{
 		close_game(game);
 	}
