@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apavlopo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/09 17:20:49 by apavlopo          #+#    #+#             */
-/*   Updated: 2024/11/09 17:21:33 by apavlopo         ###   ########.fr       */
+/*   Created: 2025/01/25 18:54:27 by apavlopo          #+#    #+#             */
+/*   Updated: 2025/01/25 18:54:41 by apavlopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static int	ft_isspace(char c)
@@ -29,12 +30,12 @@ static int	ft_isspace(char c)
 	return (0);
 }
 
-int	ft_atoi(const char *nptr)
+long	ft_atol(const char *nptr)
 {
 	size_t	i;
-	int		signd;
-	int		sign;
-	int		num;
+	long	signd;
+	long	sign;
+	long	num;
 
 	i = 0;
 	signd = 0;
