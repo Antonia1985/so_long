@@ -59,12 +59,12 @@ int			count_collectibles(t_game game);
 int			map_1st_column_height(char **map);
 int			map_1st_line_width(char **map);
 int			set_map_height(t_game *game);
-void		validate_map(t_game game);
+void		validate_map_content(t_game game);
 void		flood_fill(char **copy_map, t_game *game, int y, int x);
 void		initialize_game_members(t_game *game);
 void		initial_player_position(t_game *game);
 void		initialize_mlx(t_game *game);
-void		initialize_map(t_game *game, char *filename);
+void		initialize_and_validate_map(t_game *game, char *filename);
 void		initialize_win(t_game *game);
 void		free_map(char **map);
 #endif
