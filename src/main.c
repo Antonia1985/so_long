@@ -50,13 +50,13 @@ int	main(int ac, char **av)
 		exit(0);
 	}
 	initialize_mlx(&game);
-	initialize_map(&game, av[1]);
+	initialize_and_validate_map(&game, av[1]);
 	initialize_win(&game);
 	load_textures(&game);
 	mlx_clear_window(game.mlx, game.win);
 	render_map(&game);
 	initialize_game_members(&game);
-	validate_map(game);
+	validate_map_content(game);
 	mlx_key_hook(game.win, handle_key, &game);
 	mlx_hook(game.win, 17, 0, close_game, &game);
 	mlx_hook(game.win, 12, 1L << 15, handle_expose, &game);

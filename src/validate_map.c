@@ -91,7 +91,7 @@ char	**copy_the_map(t_game game)
 	return (map_copy);
 }
 
-void	validate_map(t_game game)
+void	validate_map_content(t_game game)
 {
 	char	**copy_map;
 	int		exits;

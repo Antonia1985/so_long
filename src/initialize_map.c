@@ -13,6 +13,33 @@
 #include "libft.h"
 #include "so_long.h"
 
+int	check_map_contour(t_game game)
+{
+	int	last_x;
+	int	last_y;
+	int	y;
+	int	x;
+
+	last_x = game.map_width - 1;
+	last_y = game.map_height - 1;
+	y = 0;
+	while (y <= last_y)
+	{
+		x = 0;
+		while (x <= last_x)
+		{
+			if (game.map[0][x] != '1' || game.map[y][0] != '1'
+				|| game.map[last_y][x] != '1' || game.map[y][last_x] != '1')
+			{
+				return (0);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (1);
+}
+
 int	check_map_shape(int map_height, char **map)
 {
 	int		y;
@@ -49,7 +76,7 @@ int	map_1st_line_width(char **map)
 	return (x);
 }
 
-void	initialize_map(t_game *game, char *filename)
+void	initialize_and_validate_map(t_game *game, char *filename)
 {
 	game->map = read_map(filename);
 	if (!game->map)
@@ -59,9 +86,10 @@ void	initialize_map(t_game *game, char *filename)
 	}
 	game->map_height = map_1st_column_height(game->map);
 	game->map_width = map_1st_line_width(game->map);
-	if (!check_map_shape(game->map_height, game->map))
+	if (!check_map_shape(game->map_height, game->map)
+		|| !check_map_contour(*game))
 	{
-		ft_putstr_fd("Error\nWrong shape of map\n", 1);
+		ft_putstr_fd("Error\nWrong shape/contour of map\n", 1);
 		exit(1);
 	}
 }
